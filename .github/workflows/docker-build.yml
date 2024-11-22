@@ -27,9 +27,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./docker/Dockerfile
+          file: ./dockers/rpc/Dockerfile
           push: true
-          tags: qqq47267758/wechat_robot_window:latest
+          tags: qqq47267758/wechat_robot_rpc:latest
           platforms: linux/amd64
           cache-from: type=gha
           cache-to: type=gha,mode=max

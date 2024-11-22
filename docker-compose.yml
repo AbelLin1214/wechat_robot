@@ -1,0 +1,17 @@
+services:
+  wechat_robot_rpc:
+    image: qqq47267758/wechat_robot_rpc:latest
+    container_name: wechat_robot_rpc
+    restart: always
+    ports:
+      - 13389:3389
+      - 9986:10086
+      - 9987:10087
+    ulimits:
+      nproc: 8192
+      nofile:
+        soft: 8192
+        hard: 8192
+    volumes:
+      - ./wechat/program:/root/.wine/drive_c/Program\ Files/Tencent/WeChat
+      - ./wechat/user_dat:/root/.wine/drive_c/users/root/AppData/Roaming/Tencent/WeChat

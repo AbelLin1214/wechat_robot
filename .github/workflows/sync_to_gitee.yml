@@ -1,0 +1,32 @@
+name: Sync to Gitee
+
+on:
+  push:
+    branches:
+      - main  # 设置你想同步的分支
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # 使用完整的克隆，避免浅克隆问题
+
+      - name: Set up Gitee credentials
+        env:
+          GITEE_USERNAME: ${{ vars.GITEE_USERNAME }}
+          GITEE_REPO: ${{ vars.GITEE_REPO }}
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          git config --global user.name "${GITEE_USERNAME}"
+          git config --global user.email "${GITEE_USERNAME}@gitee.com"
+          git remote add gitee "https://oauth2:${GITEE_TOKEN}@gitee.com/${GITEE_USERNAME}/${GITEE_REPO}.git"
+
+      - name: Sync to Gitee
+        env:
+          BRANCH_NAME: main
+        run: |
+          git push -f gitee HEAD:${BRANCH_NAME}

@@ -33,7 +33,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./dockers/rpc
-          file: Dockerfile
           push: true
           tags: qqq47267758/wechat_robot_rpc:latest
           platforms: linux/amd64

@@ -23,11 +23,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
+      - name: Check Directory
+        run: |
+          pwd
+          ls -la
+          ls -la ./dockers/rpc
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
           context: ./dockers/rpc
-          file: ./Dockerfile
+          file: Dockerfile
           push: true
           tags: qqq47267758/wechat_robot_rpc:latest
           platforms: linux/amd64

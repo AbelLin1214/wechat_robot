@@ -34,6 +34,8 @@ jobs:
           context: ./dockers/rpc
           push: true
           platforms: linux/amd64
+          build-args: |
+            TAG=${{ steps.get_version.outputs.version }}
           tags: |
             qqq47267758/wechat_robot_rpc:latest
             qqq47267758/wechat_robot_rpc:${{ steps.get_version.outputs.version }}

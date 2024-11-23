@@ -1,6 +1,6 @@
 
 FROM fedora:39
-
+ARG TAG
 WORKDIR /root
 
 RUN dnf update -y \
@@ -13,7 +13,7 @@ RUN wget https://www.python.org/ftp/python/3.12.4/python-3.12.4-amd64.exe -O pyt
 RUN xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' wine python-installer.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 \
         && rm -f python-installer.exe
 
-RUN wget https://github.com/danni-cool/wechatbot-provider-windows/releases/download/3.9.11.25/WeChatSetup-3.9.11.25.exe -O WeChatSetup.exe && \
+RUN wget https://github.com/danni-cool/wechatbot-provider-windows/releases/download/${TAG}/WeChatSetup-${TAG}.exe -O WeChatSetup.exe && \
         xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' wine WeChatSetup.exe /S && \
         rm -f WeChatSetup.exe
 

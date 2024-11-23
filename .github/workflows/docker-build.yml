@@ -22,19 +22,20 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
-      - name: Check Directory
+        
+      - name: Get Version
+        id: get_version
         run: |
-          pwd
-          ls -la
-          ls -la ./dockers/rpc
+          echo "version=$(cat ./dockers/rpc/version)" >> $GITHUB_OUTPUT
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
           context: ./dockers/rpc
           push: true
-          tags: qqq47267758/wechat_robot_rpc:latest
           platforms: linux/amd64
+          tags: |
+            qqq47267758/wechat_robot_rpc:latest
+            qqq47267758/wechat_robot_rpc:${{ steps.get_version.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

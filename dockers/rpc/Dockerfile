@@ -19,7 +19,7 @@ RUN wget https://github.com/danni-cool/wechatbot-provider-windows/releases/downl
 
 ENV PATH="/root/.wine/drive_c/Program Files/Tencent/WeChat:/root/.wine/drive_c/Program Files/Python312:${PATH}"
 
-COPY ./docker ./install
+COPY . ./install
 
 RUN echo "root:123" | chpasswd \
         && mkdir ./Desktop \
